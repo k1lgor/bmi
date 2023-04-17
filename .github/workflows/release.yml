@@ -1,7 +1,7 @@
 name: GoReleaser
 
 on:
-  pull_request:
+  pull_requests:
     - branches: [ main ]
   push:
     - branches: [ main ]
