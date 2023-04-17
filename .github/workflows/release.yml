@@ -10,9 +10,6 @@ permissions:
 
 jobs:
   releaser:
-    strategy:
-      matrix:
-        go-version: [ 1.15.x, 1.16.x, 1.17.x, 1.18.x, 1.19.x, 1.20.x ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -21,9 +18,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Go version
-        uses: actions/setup-go@v4
-        with:
-          go-version: ${{ matrix.go-version }}
+        uses: actions/setup-go@v3
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v4
