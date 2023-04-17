@@ -34,17 +34,9 @@ Second one for height in cm`,
 
 		height, err := strconv.Atoi(os.Args[2])
 		check(err)
-		total := BMI(weight, height)
 
-		if total < 18.5 {
-			fmt.Printf("Your BMI is: %.2f\nYou are underweight.", total)
-		} else if 18.5 <= total && total < 24.9 {
-			fmt.Printf("Your BMI is: %.2f\nYou are in normal weight.", total)
-		} else if 25 <= total && total < 29.9 {
-			fmt.Printf("Your BMI is: %.2f\nYou are overweight.", total)
-		} else {
-			fmt.Printf("Your BMI is: %.2f\nYou are obese.", total)
-		}
+		total, weightCategory := BMI(weight, height)
+		fmt.Printf("Your BMI is: %.2f\nYour weight is: %s", total, weightCategory)
 	},
 }
 
@@ -62,8 +54,19 @@ func check(err error) {
 	}
 }
 
-func BMI(w, h int) float64 {
-	return float64(w) / math.Pow(float64(h)/100, 2)
+func BMI(w, h int) (total float64, weightCategory string) {
+	total = float64(w) / math.Pow(float64(h)/100, 2)
+
+	if total < 18.5 {
+		weightCategory = "underweight"
+	} else if 18.5 <= total && total < 24.9 {
+		weightCategory = "normal"
+	} else if 25 <= total && total < 29.9 {
+		weightCategory = "overweight"
+	} else {
+		weightCategory = "obese"
+	}
+	return total, weightCategory
 }
 
 func init() {
