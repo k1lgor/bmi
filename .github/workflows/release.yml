@@ -2,8 +2,11 @@ name: GoReleaser
 
 on:
   push:
-    tags: [ '*' ]
-    paths-ignore: [ 'README.md', '.github/' ]
+    tags:
+      - '*'
+    paths-ignore:
+      - 'README.md'
+      - '.github/'
 
 permissions:
   contents: write
