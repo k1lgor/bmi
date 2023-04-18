@@ -22,13 +22,6 @@ First one for your weight in kg
 Second one for height in cm`,
 
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) != 2 {
-			fmt.Printf("2 paramaters are required, e.g. bmi 60 170\n")
-			os.Exit(1)
-		} else {
-			fmt.Println("Your BMI is being calculated 🖩")
-		}
-
 		weight, err := strconv.Atoi(os.Args[1])
 		check(err)
 
@@ -36,6 +29,7 @@ Second one for height in cm`,
 		check(err)
 
 		total, weightCategory := BMI(weight, height)
+		fmt.Println("Your BMI is being calculated 🖩")
 		fmt.Printf("Your BMI is: %.2f\nYour weight is: %s", total, weightCategory)
 	},
 }
