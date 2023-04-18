@@ -4,7 +4,7 @@ Copyright © 2023 Plamen Ivanov <paco.iwanow@gmail.com>
 package cmd
 
 import (
-	"fmt"
+	"github.com/apsdehal/go-logger"
 	"github.com/spf13/cobra"
 	"math"
 	"os"
@@ -29,8 +29,7 @@ Second one for height in cm`,
 		check(err)
 
 		total, weightCategory := BMI(weight, height)
-		fmt.Println("Your BMI is being calculated 🖩")
-		fmt.Printf("Your BMI is: %.2f\nYour weight is: %s", total, weightCategory)
+		loggerOutput(total, weightCategory)
 	},
 }
 
@@ -43,9 +42,27 @@ func Execute() {
 
 func check(err error) {
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		panic(err)
 	}
+}
+
+func loggerOutput(total float64, weightCategory string) {
+	log, err := logger.New("bmi", 1, os.Stdout)
+	check(err)
+
+	log.SetFormat("%{message}")
+	log.Info("Your BMI is being calculated 🖩")
+	switch weightCategory {
+	case "underweight":
+		log.WarningF("Your BMI is: %.2f\nYour weight is: %s", total, weightCategory)
+	case "normal":
+		log.NoticeF("Your BMI is: %.2f\nYour weight is: %s", total, weightCategory)
+	case "overweight":
+		log.WarningF("Your BMI is: %.2f\nYour weight is: %s", total, weightCategory)
+	case "obese":
+		log.ErrorF("Your BMI is: %.2f\nYour weight is: %s", total, weightCategory)
+	}
+	return
 }
 
 func BMI(w, h int) (total float64, weightCategory string) {
