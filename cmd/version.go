@@ -11,7 +11,7 @@ import (
 
 // versionCmd represents the version command
 var (
-	version    = "0.2.0"
+	version    = "0.3.0"
 	versionCmd = &cobra.Command{
 		Use:   "version",
 		Short: "Prints the version number of bmi",
