@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 50px;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      input,
+      select {
+        margin-bottom: 15px;
+        padding: 10px;
+      }
+      button {
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+      }
+      .result {
+        margin-top: 20px;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>BMI Calculator</h1>
+      <form action="/calculate" method="post">
+        <label for="weight">Weight:</label>
+        <input type="text" id="weight" name="weight" required />
+
+        <label for="weightUnit">Weight Unit:</label>
+        <select id="weightUnit" name="weightUnit">
+          <option value="kg">Kilograms (kg)</option>
+          <option value="lbs">Pounds (lbs)</option>
+        </select>
+
+        <label for="height">Height:</label>
+        <input type="text" id="height" name="height" required />
+
+        <label for="heightUnit">Height Unit:</label>
+        <select id="heightUnit" name="heightUnit">
+          <option value="cm">Centimeters (cm)</option>
+          <option value="in">Inches (in)</option>
+        </select>
+
+        <button type="submit">Calculate</button>
+      </form>
+
+      {{if .error}}
+      <p class="error">{{.error}}</p>
+      {{else if .bmi}}
+      <div class="result">
+        <p>Your BMI: <strong>{{.bmi}}</strong></p>
+        <p>Category: <strong>{{.category}}</strong></p>
+      </div>
+      {{end}}
+    </div>
+  </body>
+</html>
