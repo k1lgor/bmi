@@ -4,24 +4,33 @@ import (
 	"bmi/pkg/bmi"
 	"bmi/pkg/input"
 	"bmi/ui"
+	"bmi/web"
 	"flag"
 	"fmt"
 	"log"
 	"os"
 )
 
-const version = "0.4.0"
+const version = "0.5.0"
 
 func main() {
-	// Flag parsing
+	// Flags
 	showVersion := flag.Bool("version", false, "Display the version")
 	useTUI := flag.Bool("tui", false, "Run in TUI mode")
+	useWeb := flag.Bool("web", false, "Run in Web mode")
 	flag.Parse()
 
 	// Show version and exit if --version is provided
 	if *showVersion {
 		fmt.Println("BMI Calculator version:", version)
 		os.Exit(0)
+	}
+
+	// Start Web Server if --web is provided
+	if *useWeb {
+		fmt.Println("Starting web server on http://localhost:8080")
+		web.StartWeb()
+		return
 	}
 
 	// Run TUI if --tui is provided
@@ -35,7 +44,7 @@ func main() {
 
 	// CLI mode expects 4 arguments: <weight> <kg|lbs> <height> <cm|in>
 	if len(os.Args) != 5 {
-		log.Fatal("Usage: bmi <weight> <kg|lbs> <height> <cm|in> or use --tui for interactive mode.")
+		log.Fatal("Usage: bmi <weight> <kg|lbs> <height> <cm|in>, or use --tui or --web.")
 	}
 
 	weightStr, weightUnit, heightStr, heightUnit := os.Args[1], os.Args[2], os.Args[3], os.Args[4]
