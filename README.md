@@ -4,6 +4,31 @@
 
 This is a command-line and text-based UI (TUI) tool for calculating Body Mass Index (BMI) based on user input for weight and height. It supports multiple units, offers detailed BMI categorization, and includes versioning.
 
+## Project Structure
+
+bmi/
+│
+├── cmd/
+│   └── bmi/
+│       └── main.go         # CLI and TUI entry point
+│
+├── pkg/
+│   ├── bmi/
+│   │   ├── bmi.go          # Core BMI logic
+│   │   └── bmi_test.go     # Unit tests for BMI
+│   └── input/
+│       └── input.go        # Input parsing and validation
+│
+├── ui/
+│   └── tui.go              # TUI logic for text-based interface
+│
+├── web/
+│   ├── web.go              # Web server logic using Gin
+│   └── templates/
+│       └── index.html      # Web form UI
+│
+└── go.mod                  # Go module file
+
 ## Features
 
 - **CLI**: Run via the command line with unit support for kg/lbs and cm/in.
@@ -11,6 +36,10 @@ This is a command-line and text-based UI (TUI) tool for calculating Body Mass In
 - **Web Interface**: Simple web version built with Gin framework, offering a user-friendly web form.
 - **Versioning**: Display version info using `--version`.
 - **Unit Testing**: Built-in tests using Go’s testing framework.
+
+## Requirements
+
+- Go 1.23 or newer
 
 ## Installation
 
@@ -62,27 +91,20 @@ Then open your browser at `http://localhost:8080`.
 ./bmi -version
 ```
 
-## Project Structure
+## Docker
 
-bmi/
-│
-├── cmd/
-│   └── bmi/
-│       └── main.go         # CLI and TUI entry point
-│
-├── pkg/
-│   ├── bmi/
-│   │   ├── bmi.go          # Core BMI logic
-│   │   └── bmi_test.go     # Unit tests for BMI
-│   └── input/
-│       └── input.go        # Input parsing and validation
-│
-├── ui/
-│   └── tui.go              # TUI logic for text-based interface
-│
-├── web/
-│   ├── web.go              # Web server logic using Gin
-│   └── templates/
-│       └── index.html      # Web form UI
-│
-└── go.mod                  # Go module file
+You can run the BMI app in a container without installing Go:
+
+```bash
+# Build the image
+docker build -t bmi .
+
+# CLI mode
+docker run --rm bmi 70 kg 170 cm
+
+# Web mode (visit http://localhost:8080)
+docker run --rm  -p 8080:8080 bmi --web
+
+# TUI mode (interactive terminal)
+docker run -it --rm bmi --tui
+```
