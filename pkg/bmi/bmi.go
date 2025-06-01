@@ -1,11 +1,13 @@
 package bmi
 
-// CalculateBMI calculates the BMI using weight and height
+// CalculateBMI returns the Body Mass Index (BMI) given weight (kg) and height (m).
+// Formula: BMI = weight / (height * height)
 func CalculateBMI(weight, height float64) float64 {
 	return weight / (height * height)
 }
 
-// InterpretBMI gives a description based on the BMI value
+// InterpretBMI returns a human-readable BMI category string
+// based on standard BMI classification ranges.
 func InterpretBMI(bmi float64) string {
 	switch {
 	case bmi < 18.5:
