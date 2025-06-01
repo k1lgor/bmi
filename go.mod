@@ -1,10 +1,11 @@
 module bmi
 
-go 1.20
+go 1.23
 
 require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/rivo/tview v0.0.0-20240818110301-fd649dbf1223
+	github.com/sirupsen/logrus v1.9.3
 )
 
 require (
