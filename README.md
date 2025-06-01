@@ -1,11 +1,18 @@
 # BMI Calculator
 
+[![Go CI](https://github.com/k1lgor/bmi/actions/workflows/ci.yml/badge.svg)](https://github.com/k1lgor/bmi/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/k1lgor/bmi)](https://goreportcard.com/report/github.com/k1lgor/bmi)
+[![Go Reference](https://pkg.go.dev/badge/github.com/k1lgor/bmi.svg)](https://pkg.go.dev/github.com/k1lgor/bmi)
+[![codecov](https://codecov.io/gh/k1lgor/bmi/branch/main/graph/badge.svg)](https://codecov.io/gh/k1lgor/bmi)
+![Go Version](https://img.shields.io/badge/go-1.23-blue)
+
 ## Overview
 
 This is a command-line and text-based UI (TUI) tool for calculating Body Mass Index (BMI) based on user input for weight and height. It supports multiple units, offers detailed BMI categorization, and includes versioning.
 
 ## Project Structure
 
+```
 bmi/
 │
 ├── cmd/
@@ -28,6 +35,7 @@ bmi/
 │       └── index.html      # Web form UI
 │
 └── go.mod                  # Go module file
+```
 
 ## Features
 
